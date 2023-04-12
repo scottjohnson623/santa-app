@@ -1,44 +1,67 @@
-# Hello Node!
+# IMPORTANT! READ before starting
 
-This project includes a Node.js server script and a web page that connects to it. The front-end page presents a form the visitor can use to submit a color name, sending the submitted value to the back-end API running on the server. The server returns info to the page that allows it to update the display with the chosen color. 🎨
+By default for anonymous users (non logged in), your code and app will only remain on glitch.com for 5 days.
+In order to not lose your challenge, please create a glitch.com account and log in to glitch.com before proceeding.
 
-[Node.js](https://nodejs.org/en/about/) is a popular runtime that lets you run server-side JavaScript. This project uses the [Fastify](https://www.fastify.io/) framework and explores basic templating with [Handlebars](https://handlebarsjs.com/).
+The following README contains instructions to guide you through the coding challenge, please read them carefully.
 
-_Last updated: 20 Mar 2023_
+# Nodejs coding challenge:
 
-## Prerequisites
+## How to create and submit your app using glitch
 
-You'll get best use out of this project if you're familiar with basic JavaScript. If you've written JavaScript for client-side web pages this is a little different because it uses server-side JS, but the syntax is the same!
+0. **Login to glitch**: make sure you are logged in to glitch.com
 
-## What's in this project?
+1. **Clone**: Go to this URL: https://glitch.com/~nodejs-santa-app and click the `Remix your own` button to clone the code. This will copy all the code to a new, randomly generated URL (e.g. https://glitch.com/edit/#!/capable-toothpaste). This is your URL to code on, no other candidates will have this URL.
 
-← `README.md`: That’s this file, where you can tell people what your cool website does and how you built it.
+2. **Code**: You can edit the code directly in the Glitch editor or use your editor of choice (VSCode, Sublime, etc) and copy paste the files into Glitch. Git import and export is also available in the Tools menu on the bottom left. How you edit the code is entirely up to you, so long as your finished work is viewable at the URL created in the previous step.
 
-← `public/style.css`: The styling rules for the pages in your site.
+> **NOTE**: Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
 
-← `server.js`: The **Node.js** server script for your new site. The JavaScript defines the endpoints in the site back-end, one to return the homepage and one to update with the submitted color. Each one sends data to a Handlebars template which builds these parameter values into the web page the visitor sees.
+4. **Turn in**: When you finish coding, send your URL to us so we can review your code.
 
-← `package.json`: The NPM packages for your project's dependencies.
+## Objectives overview:
 
-← `src/`: This folder holds the site template along with some basic data files.
+The webapp should display a form for children to enter their id and a free text message to santa.
 
-← `src/pages/index.hbs`: This is the main page template for your site. The template receives parameters from the server script, which it includes in the page HTML. The page sends the user submitted color value in the body of a request, or as a query parameter to choose a random color.
+When submitting the form, the server should check:
 
-← `src/colors.json`: A collection of CSS color names. We use this in the server script to pick a random color, and to match searches against color names.
+1.  that the child is registered
+2.  that the child is less than 10 years old.
+    To this purpose, the server can fetch user and profiles data in JSON format from:
 
-← `src/seo.json`: When you're ready to share your new site or add a custom domain, change SEO/meta settings in here.
+- https://raw.githubusercontent.com/alj-devops/santa-data/master/userProfiles.json
+- https://raw.githubusercontent.com/alj-devops/santa-data/master/users.json
 
-## Try this next 🏗️
+If the child is not registered (no match for the user id) or more than 10years old, the webapp should display a basic error page with an error message explaining the problem.\
+If the child is registered and less than 10 years old, the server should show a page indicating that the request has been received.
 
-Take a look in `TODO.md` for next steps you can try out in your new site!
+Every 15seconds, the server should send an email with information on all pending (not yet sent) requests including:
 
-___Want a minimal version of this project to build your own Node.js app? Check out [Blank Node](https://glitch.com/edit/#!/remix/glitch-blank-node)!___
+- child username (eg. charlie.brown)
+- child's address (eg. 219-1130, Ikanikeisaiganaibaai, Musashino-shi, Tokyo)
+- request free text as was input in the form
 
-![Glitch](https://cdn.glitch.com/a9975ea6-8949-4bab-addb-8a95021dc2da%2FLogo_Color.svg?v=1602781328576)
+Email sender should be set as do_not_reply@northpole.com, and sent to santa@northpole.com
 
-## You built this with Glitch!
+## Tips and detailed instructions:
 
-[Glitch](https://glitch.com) is a friendly community where millions of people come together to build web apps and websites.
+- Somebody started to work on the app, but left it unfinished and did not use any modern technology. We added React for you to have a clean base but feel free to use any other technology you might prefer.
+- The UI and UX of the application for this challenge is not the priority. The pages/email do not need to look good, as long as they convey the information effectively.
+- You should fetch the JSON data at every form submission (consider it as an API).
+- For the sake of the challenge, you can keep the requests in-memory only.
+- You are encouraged to select and use npm packages as needed (you can add packages by editing package.json, or using `npm install` from the glitch console).
+- To get an smtp server for emails, go to https://ethereal.email/ and click "Create Ethereal Account".\
+  This will give you an account (take note of your username and pwd if you need to re-logon later) and smtp server (actual emails do not get delivered).\
+  Go to https://ethereal.email/messages to see the emails that have been received by the smtp server.
 
-- Need more help? [Check out our Help Center](https://help.glitch.com/) for answers to any common questions.
-- Ready to make it official? [Become a paid Glitch member](https://glitch.com/pricing) to boost your app with private sharing, more storage and memory, domains and more.
+## Some things we will look for in your submission
+
+- Code quality (readability, use of modern syntax...)
+- Does the app work as designed (cf. objectives overview)
+- App architecture (folder structure, configuration management...)
+- Documentation (why did you choose to change or add a package...)
+
+## Tips on usage of glitch
+
+Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+When your app is running, you can access logs and console using the "Tools" button at the bottom left.
